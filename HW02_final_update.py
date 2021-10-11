@@ -264,13 +264,11 @@ Step 3: Return matrix
 """
 
 def Matr_Matr_mult(matrix_e, matrix_f):
-    #matrix_res = [0 for element in matrix_e]
-    result = [0]
-    for index in range(len(matrix_e)):
-        #matrix_res[index] = Matr_Vec_mult(matrix_e[index], matrix_f[index])
-        result = (Matr_Vec_mult(matrix_e, matrix_f))
+    result = []
+    for index in range(len(matrix_f)):
+        result.append(Matr_Vec_mult(matrix_e, matrix_f[index]))
     return result
-#All tests except for the fifth produce the result we want, I'm not sure if the "result" part of the code or the index part 
+
 
 
 
@@ -355,7 +353,6 @@ print('Test Output #1 for Matrix Matrix Multiplication: ' + str(Matr_Matr_mult(t
 print('Should have been [[6, 6, 6], [6, 6, 6], [6, 6, 6]]')
 print()
 print('Test Output#2 for Matrix Matrix Multiplication: ' + str(Matr_Matr_mult(test_matrix_03, test_matrix_04)))
-print('Should have been [[4, 7], [7, 12]]')
+print('Should have been [[8, 13], [5, 8]]')
 print()
 #"""
-
