@@ -65,6 +65,12 @@ def add_vectors(vector_a,vector_b):
 
 
 
+
+
+
+
+
+
 #Problem 01
 
 """
@@ -99,7 +105,13 @@ def Scal_Vec_mult(vector_c, scalar_a):
         result[index] = vector_c[index] * scalar_a
     return result
 
-    
+ 
+
+
+
+
+
+   
 #Problem 02
 
 """
@@ -132,6 +144,12 @@ def Scal_Matr_mult(matrix_a, scalar_b):
     for index in range((len(matrix_a))):
         result.append(Scal_Vec_mult(matrix_a[index], scalar_b))
     return result
+
+
+
+
+
+
 
 #Problem 03
 
@@ -170,6 +188,10 @@ def Matr_add(matrix_b, matrix_c):
         result.append(add_vectors(matrix_b[index], matrix_c[index]))
     return result
 
+
+
+
+
 #Problem 04
 
 """
@@ -193,7 +215,7 @@ Pseudo-Code
 
 Step 1: Define matrix-vector multiplication
 
-Step 2: Initialize result vector to the size equal to the number of columns on the 
+Step 2: Initialize result vector to the size equal to the number of columns on the matrix
 
 Step 3: Return Matrix
 """
@@ -208,6 +230,10 @@ def Matr_Vec_mult(matrix_d, vector_d):
     for index in range(2, len(matrix_res)):
         result = add_vectors(result, matrix_res[index])
     return result
+
+
+
+
 
 
 #Problem 05
@@ -238,10 +264,16 @@ Step 3: Return matrix
 """
 
 def Matr_Matr_mult(matrix_e, matrix_f):
-    matrix_res = [0 for element in matrix_e]
+    #matrix_res = [0 for element in matrix_e]
     result = [0]
-    for index in range(len(matrix_f)):
-        matrix_res[index] = Matr_Matr_mult(matrix_e[index], matrix_f[index])
+    for index in range(len(matrix_e)):
+        #matrix_res[index] = Matr_Vec_mult(matrix_e[index], matrix_f[index])
+        result = (Matr_Vec_mult(matrix_e, matrix_f))
+    return result
+#All tests except for the fifth produce the result we want, I'm not sure if the "result" part of the code or the index part 
+
+
+
 
 
 
@@ -261,6 +293,15 @@ test_matrix_04 = [[2, 3], [1, 2]]
 
 test_matrix_05 = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
 test_matrix_06 = [[2, 2, 2], [2, 2, 2], [2, 2, 2]]
+
+
+
+
+
+
+
+
+
 
 """
 # add_vectors(test_vector_01,test_vector_02) should output [4,3,6]
@@ -308,8 +349,13 @@ print('Should have been [12, 12, 12]')
 print()
 #"""
 
-#All except Q5 is complete. Cut off the final test so the error won't pop up when running code
-"""
+#"""
 print()
 print('Test Output #1 for Matrix Matrix Multiplication: ' + str(Matr_Matr_mult(test_matrix_05, test_matrix_06)))
-"""
+print('Should have been [[6, 6, 6], [6, 6, 6], [6, 6, 6]]')
+print()
+print('Test Output#2 for Matrix Matrix Multiplication: ' + str(Matr_Matr_mult(test_matrix_03, test_matrix_04)))
+print('Should have been [[4, 7], [7, 12]]')
+print()
+#"""
+
