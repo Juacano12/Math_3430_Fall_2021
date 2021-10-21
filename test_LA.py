@@ -61,4 +61,34 @@ def test_Matr_Matr_mult():
     matr_5 = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
     matr_6 = [[2, 2, 2], [2, 2, 2], [2, 2, 2]]
     assert LA.Matr_Matr_mult(matr_5, matr_6) == [[6, 6, 6], [6, 6, 6], [6, 6, 6]]
-    
+
+
+
+#Tests for HW#4
+
+
+
+def test_abs_value():
+    assert LA.abs_val(-5) == 5
+    assert LA.abs_val(complex(3., -4.)) == 5.0
+
+
+def test_p_norm():
+    assert LA.p_norm([3, 4]) == 5.0
+    assert LA.p_norm([5, complex(3, 4)], 1) == 10.0
+
+
+def test_inf_norm():
+    assert LA.inf_norm([3, 4]) == 4.0
+    assert LA.inf_norm([3, complex(3, 4)]) == 5.0
+
+
+def test_p_norm_2():
+    assert LA.p_norm_2([3, 4]) == 5.0
+    assert LA.p_norm_2([5, complex(3, 4)], 1) == 10.0
+    assert LA.p_norm_2([3, complex(3, 4)], infi = True) == 5.0
+
+
+def test_inn_prod():
+    assert LA.inn_prod([1, 2, 4], [3, 1, 2]) == 13
+    assert LA.inn_prod([2, complex(3, -3)], [complex(3, 7), 3]) == complex(15, 23)
