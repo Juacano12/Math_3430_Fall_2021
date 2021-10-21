@@ -1,56 +1,3 @@
-"""
-This homework is due on 10/15/2021 by 11:59pm. 
-
-
-For this assignment you will be writing a python script to be named LA.py. In
-this script you will need to write 6 functions. Every function must 
-
-1) Have a doc string.
-
-2) Have type annotations
-
-3) Be tested using unit testing. 
-
-Once you have finished writing LA.py you will upload it to the same github repo
-you used for HW02. The functions you need to write are 
-
-#0 A function which takes as it's arguments two vectors stored as
-lists and returns their sum, also stored as a list.
-
-
-#1 A function which takes as it's arguments a vector stored as a list and a
-scalar, and returns the scalar vector multiplication stored as a list.
-
-
-#2 A function which takes as it's arguments a matrix, stored as a list of lists
-where each component list represents a column of the matrix(you cannot represent
-the matrix as a list of rows!) and a scalar and returns their product, also
-stored as a list of lists where each component list represents a column. You
-must use the function from problem #1. Failure to use this function will result
-in an earned grade of 0.
-
-#3 A function which takes as it's arguments two matrices stored as lists of
-lists where each component list represents a column vector, and returns their
-sum stored in the same manner. You must use the function in problem #0 in your
-method here. Failure to use the function from problem #0 will reuslt in an
-earned grade of 0.
-
-#4 A function which takes as it's argument a matrix (stored as a list of lists,
-each component list representing a column vector), and a vector stored as a
-list, and returns the matrix-vector product. This function must compute the
-matrix-vector product by calculating the neccessary linear combination of the
-input matrices columns. All other methods of matrix-vector multiplication are
-strictly forbidden and their use will result in a grade of 0. For this function
-you must use the functions written for problem #0 and problem #1. Failure to use
-these functions will result in an earned grade of 0.
-
-#5 A function which takes as it's arguments two matrices, each stored as a list
-of lists where each component list represents a column vector, and returns their
-product stored in the same manner. To earn any credit on this problem you must
-use the function from problem #4 to implement the matrix-vector method of
-matrix-matrix multiplication. Use of any other method will result in an earned
-grade of 0.
-"""
 
 import pytest
 
@@ -273,3 +220,192 @@ def Matr_Matr_mult(matrix_e: list,
     for index in range(len(matrix_f)):
         result.append(Matr_Vec_mult(matrix_e, matrix_f[index]))
     return result
+
+
+
+
+#Homework 4
+
+
+
+
+#Problem 1
+
+def abs_val(scalar_c: complex) -> float:
+    """
+    Returns the absolute value of the input scalar
+    
+    Found by taking the comlplex conjugate of the input scalar, then multiplying 
+    the conjugate with the original scalar, and then finally taking the square 
+    root of the scalar.
+
+    Parameters
+    ----------
+    scalar_c : complex
+        A combination of a real and imaginary number.
+
+    Returns
+    -------
+    float
+        The absolute value of the scalar.
+
+    """
+    def comp_conj(scalar_c: complex) -> float:
+        """
+        Finds the complex conjugate of the scalar
+        
+        Done by taking a complex scalar and multiplying its imaginary number 
+        by -1.
+
+        Parameters
+        ----------
+        scalar_c : complex
+            A combination of a real and imaginary number
+
+        Returns
+        -------
+        float
+            The complex conjugate of the input scalar.
+
+        """
+        cj: complex = complex(scalar_c.real, scalar_c.imag * -1)
+        return cj
+    result: float = (scalar_c*comp_conj(scalar_c)) ** (1/2)
+    return result.real
+
+
+
+
+
+ 
+
+#Problem 2
+
+def p_norm(vector_e: list,
+           scalar_d: float = 2) -> float:
+    """
+    Finds the p-norm of the input vector.
+    
+    This is done by taking the absolute value of each element within the vector
+    and multiplying it to the power of the input scalar, adding it to the final
+    total.
+
+    Parameters
+    ----------
+    vector_e : list
+        A vector capable of taking complex numbers. 
+    scalar_d : float, optional
+         The default is 2.
+
+    Returns
+    -------
+    float
+        The p-norm of the vector.
+
+    """
+    result: float = 0
+    for element in vector_e:
+        result += (abs_val(element) ** scalar_d)
+    result **= (1 / scalar_d)
+    return result 
+
+
+
+
+
+   
+#Problem 3
+
+def inf_norm(vector_f: list) -> float:
+    """
+    Finds the infinite norm of the input vector.
+    
+    Done by finding the absolute value of each element in the input vector,
+    then finding and returning the max of those elements. 
+
+    Parameters
+    ----------
+    vector_f : list
+        A vector capable of taking complex numbers.
+
+    Returns
+    -------
+    float
+        The infinite norm of the vector.
+
+    """
+    result: float = None
+    vector_f = [abs_val(element) for element in vector_f]
+    result = max(vector_f)
+    return result
+
+
+
+
+
+#Problem 4
+
+def p_norm_2(vector_g: list,
+             scalar_e: float = 2,
+             infi: bool = False) -> float:
+    """
+    Finds the p-norm or the infinite norm of the input vector. 
+    
+    If the infi is false it will run the previous def of p_norm, however if it
+    is true, then it will run the previous def of inf_norm.
+
+    Parameters
+    ----------
+    vector_g : list
+        A vector capable of taking complex numbers.
+    scalar_e : float, optional
+        The default is 2.
+    infi : bool, optional
+        The default is False.
+
+    Returns
+    -------
+    float
+        The p_norm of the vector if false. The inf_norm of the vector if true.
+
+    """
+    result: float = None
+    if not infi:
+        result = p_norm(vector_g, scalar_e)
+    else:
+        result = inf_norm(vector_g)
+    return result
+
+
+
+
+#Problem 5
+
+def inn_prod(vector_h: list,
+             vector_i: list) -> complex:
+    """
+    Finds the inner product of both input vectors.
+    
+    Done by finding the conjugate of the first vector and then multiplying it 
+    to the second vector. Finally it adds each element with the result. 
+
+    Parameters
+    ----------
+    vector_h : list
+        A vector capable of holding complex numbers.
+    vector_i : list
+        A vector capable of holding complex numbers. Must be compatable to be
+        multiplied to the first vector.
+        
+    Returns
+    -------
+    complex
+        The inner product of both vectors.
+
+    """
+    cj: complex = [complex(element.real, element.imag * -1) for element in vector_h]
+    result: complex = 0
+    for h_element, i_element in zip(cj, vector_i):
+        result += h_element * i_element
+    return result
+
