@@ -62,8 +62,6 @@ def orthonormal(matrix_a: list) -> list:
     result: list = stable_GrSch(matrix_a)[0]
     return result
 
-#Homework 7
-
 
 def conj(matrix_a: list) -> list:
     x: int = len(matrix_a[0])
@@ -96,7 +94,6 @@ def house_qk(matrix_b: list, q: int) -> list:
         q_k[i] = LA.add_vectors(q_k[i][:q] + c_col, q_k[i])
     return q_k
 
-
 def householder(matrix_d: list) -> list:
     x: int = len(matrix_d[0])
     y: int = len(matrix_d)
@@ -109,4 +106,3 @@ def householder(matrix_d: list) -> list:
         matrix_e = LA.Matr_Matr_mult(q_k, matrix_e)
     matrix_e = conj(matrix_e)
     return [matrix_e, matrix_b]
-
